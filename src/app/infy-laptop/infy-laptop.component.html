@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-5 col-md-offset-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Register for a Laptop</div>
+      <div class="panel-body">
+
+        <!-- Write the code for form here -->
+        <!-- should use the bootstrap classes form, form-group, form-control -->
+        <!-- use error-message class for displaying field leval error messages -->
+        <form [formGroup]="form" (ngSubmit)="register(form.value)">
+          <div class="form-group">
+            <label for="">Employee Name</label>
+            <input type="text" class="form-control" placeholder="Employee Name" formControlName="employeeName">
+            <small id="" *ngIf="form.controls.employeeName.invalid && form.controls.employeeName.errors.required" class="form-text text-muted"
+              style="color:red;"> Employee Name is required.</small>
+            <small id="" *ngIf="form.controls.employeeName.invalid && form.controls.employeeName.dirty && form.controls.employeeName.errors.pattern"
+              class="form-text text-muted" style="color:red;">The name should contain only characters and use expantion
+              for initials.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="">Email Id</label>
+            <input type="email" class="form-control" id="" name="emailId" aria-describedby="" placeholder="Enter Email Id" formControlName="emailId">
+            <small id="" *ngIf="form.controls.emailId.invalid && form.controls.emailId.errors.required && !form.controls.emailId.dirty"
+              class="form-text text-muted" style="color:red;">Email is required.</small>
+            <small id="" *ngIf="form.controls.emailId.invalid && form.controls.emailId.errors.email" class="form-text text-muted"
+              style="color:red;">Please provide valid Email ID.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Date of joining</label>
+            <input type="date" class="form-control" id="" aria-describedby="" name="joiningDate" formControlName="joiningDate">
+            <small id="" *ngIf="form.controls.joiningDate.invalid && form.controls.joiningDate.required" style="color:red;" class="form-text text-muted">Date is required.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="">Laptop</label>
+            <input type="text" class="form-control" id="" aria-describedby="" formControlName="laptop" name="laptop" placeholder="">
+            <small id="" *ngIf="form.controls.laptop.invalid && form.controls.laptop.errors.required" class="form-text text-muted" style="color:red;">Please provide this field.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="">Phone No</label>
+            <input type="number" class="form-control" id="" name="contactNo" formControlName="contactNo" minlength="10" maxlength="10" aria-describedby=""
+              placeholder="Phone No">
+            <small id="" *ngIf="form.controls.employeeName.value.length < 10" class="form-text text-muted" style="color:red;">Phone number should be a ten digit number.</small>
+          </div>
+
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div *ngIf="errorMessage!=null">
+          <span class="text-danger">{{errorMessage}}</span>
+        </div>
+        <div *ngIf="registrationid!=null">
+
+          <span class="text-success">{{registrationid|successMessagePipe}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
